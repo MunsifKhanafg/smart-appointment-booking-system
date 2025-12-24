@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import BookingPage from './pages/BookingPage';
 import AdminPage from './pages/AdminPage';
@@ -16,6 +16,7 @@ function App() {
                 <span className="logo-icon">🏥</span>
                 <span className="logo-text">HealthCare Plus</span>
               </Link>
+
               <div className="nav-links">
                 <Link to="/" className="nav-link">Home</Link>
                 <Link to="/booking" className="nav-link">Book Appointment</Link>
@@ -35,7 +36,9 @@ function App() {
 
         <footer className="footer">
           <div className="container">
-            <p>&copy; 2024 HealthCare Plus. All rights reserved. | Your Health, Our Priority</p>
+            <p>
+              &copy; 2024 HealthCare Plus. All rights reserved. | Your Health, Our Priority
+            </p>
           </div>
         </footer>
       </div>
