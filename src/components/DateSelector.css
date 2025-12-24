@@ -1,0 +1,205 @@
+.date-selector {
+  animation: fadeIn 0.5s ease;
+}
+
+.section-heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+/* Quick Dates */
+.quick-dates {
+  margin-bottom: 2rem;
+}
+
+.quick-dates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.quick-date-btn {
+  padding: 1rem;
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.quick-date-btn:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.quick-date-btn.selected {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-color: transparent;
+  color: white;
+}
+
+.quick-date-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.quick-date-full {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Calendar Section */
+.calendar-section {
+  margin-bottom: 2rem;
+}
+
+.calendar-input-container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.calendar-input:hover {
+  border-color: var(--primary-color);
+}
+
+.calendar-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Selected Date Display */
+.selected-date-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.display-icon {
+  font-size: 2.5rem;
+}
+
+.display-content {
+  flex: 1;
+}
+
+.display-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 0.3rem;
+}
+
+.display-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.btn-back,
+.btn-continue {
+  flex: 1;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-back {
+  background: white;
+  border: 2px solid var(--border-color);
+  color: var(--text-dark);
+}
+
+.btn-back:hover {
+  border-color: var(--text-dark);
+  transform: translateY(-2px);
+}
+
+.btn-continue {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+}
+
+.btn-continue:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-continue:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .quick-dates-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+  }
+
+  .quick-date-btn {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .quick-date-label {
+    font-size: 0.85rem;
+  }
+
+  .quick-date-full {
+    font-size: 0.75rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .btn-back,
+  .btn-continue {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-dates-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .calendar-input {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .selected-date-display {
+    flex-direction: column;
+    text-align: center;
+  }
+}
