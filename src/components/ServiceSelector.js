@@ -8,10 +8,10 @@ const ServiceSelector = ({ onSelect }) => {
 
   const categories = [
     { id: 'all', name: 'All Services', icon: '🏥' },
-    { id: 'general', name: 'General Care', icon: '👨‍⚕️' },
-    { id: 'specialist', name: 'Specialists', icon: '🩺' },
-    { id: 'therapy', name: 'Therapy', icon: '🧘' },
-    { id: 'alternative', name: 'Alternative Medicine', icon: '🌿' }
+    { id: 'general', name: 'General Care', icon: '🩺' },
+    { id: 'specialist', name: 'Specialists', icon: '👨‍⚕️' },
+    { id: 'therapy', name: 'Therapy', icon: '💆' },
+    { id: 'alternative', name: 'Alternative', icon: '🌿' }
   ];
 
   const getCategoryForService = (serviceName) => {
@@ -31,16 +31,15 @@ const ServiceSelector = ({ onSelect }) => {
   return (
     <div className="service-selector">
       <div className="selector-card">
-        <h2 className="selector-title">Choose Your Medical Service</h2>
+        <h2 className="selector-title">🩺 Choose Your Medical Service</h2>
         <p className="selector-subtitle">Select from 55+ specialized healthcare services</p>
 
-        {/* Search and Filter */}
         <div className="search-filter-container">
           <div className="search-box">
             <span className="search-icon">🔍</span>
             <input
               type="text"
-              placeholder="Search for a service..."
+              placeholder="Search for a service or specialist..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
@@ -61,7 +60,6 @@ const ServiceSelector = ({ onSelect }) => {
           </div>
         </div>
 
-        {/* Services Grid */}
         <div className="services-grid">
           {filteredServices.map(service => (
             <div
@@ -69,18 +67,27 @@ const ServiceSelector = ({ onSelect }) => {
               className="service-card"
               onClick={() => onSelect(service.id)}
             >
-              <div className="service-icon-large">{service.icon}</div>
-              <h3 className="service-name">{service.name}</h3>
+              <div className="service-header">
+                <h3 className="service-name">{service.name}</h3>
+              </div>
+              
+              <div className="doctor-info">
+                <p className="doctor-name">{service.doctor}</p>
+                <p className="doctor-qualification">{service.qualification}</p>
+                <p className="doctor-experience">{service.experience} Experience</p>
+              </div>
+
               <div className="service-details">
                 <div className="service-detail">
-                  <span className="detail-icon">💰</span>
-                  <span className="detail-text">₹{service.fee}</span>
+                  <span className="detail-label">💰 Fee</span>
+                  <span className="detail-value">Rs {service.fee}</span>
                 </div>
                 <div className="service-detail">
-                  <span className="detail-icon">⏱️</span>
-                  <span className="detail-text">{service.duration}</span>
+                  <span className="detail-label">⏱️ Duration</span>
+                  <span className="detail-value">{service.duration}</span>
                 </div>
               </div>
+              
               <button className="select-service-btn">Select Service</button>
             </div>
           ))}
@@ -88,8 +95,7 @@ const ServiceSelector = ({ onSelect }) => {
 
         {filteredServices.length === 0 && (
           <div className="no-results">
-            <span className="no-results-icon">🔍</span>
-            <p className="no-results-text">No services found matching your search.</p>
+            <p className="no-results-text">No services found matching your search criteria.</p>
             <button
               className="clear-search-btn"
               onClick={() => {
@@ -97,7 +103,7 @@ const ServiceSelector = ({ onSelect }) => {
                 setSelectedCategory('all');
               }}
             >
-              Clear Filters
+              🔄 Clear All Filters
             </button>
           </div>
         )}

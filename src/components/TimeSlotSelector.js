@@ -60,7 +60,7 @@ const TimeSlotSelector = ({ onSelect, onBack, serviceId, date }) => {
               onClick={() => handleSlotClick(slot)}
               disabled={!isAvailable}
             >
-              {slot}
+              ⏰ {slot}
             </button>
           );
         })}
@@ -73,14 +73,13 @@ const TimeSlotSelector = ({ onSelect, onBack, serviceId, date }) => {
   return (
     <div className="time-slot-selector">
       <div className="selector-card">
-        <h2 className="selector-title">Choose Time Slot</h2>
+        <h2 className="selector-title">⏰ Choose Time Slot</h2>
         <p className="selector-subtitle">Select your preferred time for the appointment</p>
 
-        {/* Availability Info */}
         <div className="availability-info">
           <div className="info-item">
             <span className="info-icon">⏰</span>
-            <span className="info-text">{availableCount} slots available</span>
+            <span className="info-text">✓ {availableCount} slots available</span>
           </div>
           <div className="legend">
             <div className="legend-item">
@@ -94,44 +93,40 @@ const TimeSlotSelector = ({ onSelect, onBack, serviceId, date }) => {
           </div>
         </div>
 
-        {/* Time Slots by Period */}
         <div className="slots-container">
-          {morning.length > 0 && <SlotGroup title="Morning" icon="🌅" slots={morning} />}
-          {afternoon.length > 0 && <SlotGroup title="Afternoon" icon="☀️" slots={afternoon} />}
-          {evening.length > 0 && <SlotGroup title="Evening" icon="🌆" slots={evening} />}
+          {morning.length > 0 && <SlotGroup title="🌅 Morning" icon="AM" slots={morning} />}
+          {afternoon.length > 0 && <SlotGroup title="☀️ Afternoon" icon="PM" slots={afternoon} />}
+          {evening.length > 0 && <SlotGroup title="🌙 Evening" icon="EVE" slots={evening} />}
         </div>
 
-        {/* Selected Slot Display */}
         {selectedSlot && (
           <div className="selected-slot-display">
             <span className="display-icon">⏰</span>
             <div className="display-content">
-              <div className="display-label">Selected Time</div>
+              <div className="display-label">Selected Time Slot</div>
               <div className="display-value">{selectedSlot}</div>
             </div>
           </div>
         )}
 
-        {/* No Slots Available Message */}
         {availableCount === 0 && (
           <div className="no-slots-message">
-            <span className="message-icon">😔</span>
-            <p className="message-text">No slots available for this date.</p>
-            <p className="message-subtext">Please select a different date.</p>
+            <div className="message-icon"></div>
+            <p className="message-text">No slots available for this date</p>
+            <p className="message-subtext">Please select a different date to view available time slots</p>
           </div>
         )}
 
-        {/* Action Buttons */}
         <div className="action-buttons">
           <button className="btn-back" onClick={onBack}>
-            ← Back
+            Back
           </button>
           <button
             className="btn-continue"
             onClick={handleConfirm}
             disabled={!selectedSlot}
           >
-            Continue →
+            Continue
           </button>
         </div>
       </div>

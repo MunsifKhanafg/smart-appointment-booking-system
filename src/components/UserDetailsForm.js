@@ -20,7 +20,6 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
       ...formData,
       [name]: value
     });
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -45,11 +44,11 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
       newErrors.userEmail = 'Please enter a valid email';
     }
 
-    const phoneRegex = /^[0-9]{10}$/;
+    const phoneRegex = /^[0-9]{11}$/;
     if (!formData.userPhone.trim()) {
       newErrors.userPhone = 'Phone number is required';
     } else if (!phoneRegex.test(formData.userPhone.replace(/\s/g, ''))) {
-      newErrors.userPhone = 'Please enter a valid 10-digit phone number';
+      newErrors.userPhone = 'Please enter a valid 11-digit phone number';
     }
 
     if (!formData.userAge) {
@@ -82,13 +81,12 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
   return (
     <div className="user-details-form">
       <div className="selector-card">
-        <h2 className="selector-title">Enter Your Details</h2>
+        <h2 className="selector-title">📋 Enter Your Details</h2>
         <p className="selector-subtitle">Please provide accurate information for your appointment</p>
 
-        {/* Booking Summary */}
         <div className="form-booking-summary">
           <div className="summary-row">
-            <span className="summary-icon">{selectedService?.icon}</span>
+            <span className="summary-icon">🩺</span>
             <div className="summary-info">
               <div className="summary-label">Service</div>
               <div className="summary-value">{selectedService?.name}</div>
@@ -107,12 +105,11 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
             <span className="summary-icon">💰</span>
             <div className="summary-info">
               <div className="summary-label">Consultation Fee</div>
-              <div className="summary-value">₹{selectedService?.fee}</div>
+              <div className="summary-value">Rs {selectedService?.fee}</div>
             </div>
           </div>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="details-form">
           <div className="form-grid">
             <div className="form-group">
@@ -176,7 +173,8 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
                 value={formData.userPhone}
                 onChange={handleChange}
                 className={`form-input ${errors.userPhone ? 'error' : ''}`}
-                placeholder="10-digit mobile number"
+                placeholder="03001234567 (11 digits)"
+                maxLength="11"
               />
               {errors.userPhone && <span className="error-message">{errors.userPhone}</span>}
             </div>
@@ -214,12 +212,11 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
             {errors.symptoms && <span className="error-message">{errors.symptoms}</span>}
           </div>
 
-          {/* Action Buttons */}
           <div className="action-buttons">
             <button type="button" className="btn-back" onClick={onBack}>
-              ← Back
+              Back
             </button>
-            <button type="submit" className="btn-submit">
+            <button type="submit" className="btn-submit btn-continue">
               Confirm Booking
             </button>
           </div>

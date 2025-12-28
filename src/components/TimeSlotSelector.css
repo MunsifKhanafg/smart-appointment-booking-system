@@ -1,72 +1,89 @@
 .time-slot-selector {
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.6s ease-out;
 }
 
-/* Availability Info */
 .availability-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background: var(--bg-gray);
-  border-radius: 12px;
-  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 18px;
+  margin-bottom: 2.5rem;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.2rem;
+  border: 2px solid rgba(102, 126, 234, 0.15);
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 
 .info-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 14px;
+  color: white;
+  flex-shrink: 0;
+  font-weight: 800;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
 }
 
 .info-text {
-  font-weight: 600;
-  color: var(--text-dark);
+  font-weight: 700;
+  color: var(--dark);
+  font-size: 1.05rem;
 }
 
 .legend {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .legend-box {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .legend-box.available {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .legend-box.booked {
-  background: var(--border-color);
+  background: var(--gray-lighter);
 }
 
 .legend-text {
-  font-size: 0.9rem;
-  color: var(--text-light);
+  font-size: 0.95rem;
+  color: var(--gray);
+  font-weight: 600;
 }
 
-/* Slots Container */
 .slots-container {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .slot-group {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  background: white;
+  padding: 1.8rem;
+  border-radius: 20px;
+  border: 2px solid var(--gray-lightest);
 }
 
 .slot-group:last-child {
@@ -76,201 +93,174 @@
 .slot-group-title {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 2px solid var(--border-color);
+  gap: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 1.3rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gray-lightest);
 }
 
 .slot-group-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  border-radius: 12px;
+  color: #667eea;
+  font-weight: 800;
 }
 
 .slots-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 1rem;
 }
 
 .slot-btn {
-  padding: 1rem;
+  padding: 1.2rem 0.8rem;
   background: white;
-  border: 2px solid var(--border-color);
-  border-radius: 10px;
-  font-weight: 600;
-  color: var(--text-dark);
-  transition: all 0.3s ease;
-  font-size: 1rem;
+  border: 2px solid var(--gray-lightest);
+  border-radius: 14px;
+  font-weight: 700;
+  color: var(--dark);
+  transition: var(--transition);
+  font-size: 1.05rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.slot-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.slot-btn:hover:not(.disabled)::before {
+  transform: scaleX(1);
 }
 
 .slot-btn:hover:not(.disabled) {
-  border-color: var(--primary-color);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  border-color: #667eea;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
+  cursor: pointer;
 }
 
 .slot-btn.selected {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-color: transparent;
   color: white;
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
 }
 
 .slot-btn.disabled {
-  background: var(--bg-gray);
-  color: var(--text-light);
-  border-color: var(--border-color);
+  background: var(--gray-lightest);
+  color: var(--gray-light);
+  border-color: var(--gray-lightest);
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-/* Selected Slot Display */
 .selected-slot-display {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-  border-radius: 12px;
-  margin-bottom: 2rem;
+  gap: 1.3rem;
+  padding: 1.8rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
+  border-radius: 20px;
+  margin-bottom: 2.5rem;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.1);
+  animation: scaleIn 0.4s ease-out;
 }
 
-.display-icon {
-  font-size: 2.5rem;
+.selected-slot-display .display-icon {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
 
-.display-content {
-  flex: 1;
-}
-
-.display-label {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  margin-bottom: 0.3rem;
-}
-
-.display-value {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text-dark);
-}
-
-/* No Slots Message */
 .no-slots-message {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(251, 146, 60, 0.05) 100%);
+  border-radius: 20px;
+  border: 2px dashed rgba(245, 158, 11, 0.3);
 }
 
 .message-icon {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.message-icon::before {
+  content: '⚠️';
 }
 
 .message-text {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 0.6rem;
 }
 
 .message-subtext {
-  color: var(--text-light);
+  color: var(--gray);
+  font-size: 1.05rem;
+  font-weight: 500;
 }
 
-/* Action Buttons */
-.action-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-.btn-back,
-.btn-continue {
-  flex: 1;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.btn-back {
-  background: white;
-  border: 2px solid var(--border-color);
-  color: var(--text-dark);
-}
-
-.btn-back:hover {
-  border-color: var(--text-dark);
-  transform: translateY(-2px);
-}
-
-.btn-continue {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  border: none;
-}
-
-.btn-continue:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-continue:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
   .availability-info {
     flex-direction: column;
     align-items: flex-start;
+    padding: 1.3rem;
+  }
+
+  .legend {
+    width: 100%;
+    justify-content: center;
   }
 
   .slots-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 0.6rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 
   .slot-btn {
-    padding: 0.8rem 0.5rem;
-    font-size: 0.9rem;
+    padding: 1rem 0.7rem;
+    font-size: 1rem;
   }
 
-  .action-buttons {
-    flex-direction: column;
-  }
-
-  .btn-back,
-  .btn-continue {
-    width: 100%;
+  .slot-group {
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .slots-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
   }
 
   .slot-btn {
-    padding: 0.7rem 0.3rem;
-    font-size: 0.85rem;
+    padding: 0.9rem 0.6rem;
+    font-size: 0.95rem;
   }
 
   .selected-slot-display {
     flex-direction: column;
     text-align: center;
-  }
-
-  .legend {
-    flex-direction: column;
-    gap: 0.8rem;
-    width: 100%;
+    padding: 1.5rem;
   }
 }

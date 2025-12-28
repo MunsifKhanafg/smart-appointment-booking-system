@@ -25,7 +25,7 @@ const DateSelector = ({ onSelect, onBack, selectedService }) => {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
       options.push({
-        label: i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : date.toLocaleDateString('en-US', { weekday: 'short' }),
+        label: i === 0 ? '📅 Today' : i === 1 ? '➡️ Tomorrow' : date.toLocaleDateString('en-US', { weekday: 'short' }),
         fullLabel: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         value: date.toISOString().split('T')[0]
       });
@@ -39,10 +39,9 @@ const DateSelector = ({ onSelect, onBack, selectedService }) => {
   return (
     <div className="date-selector">
       <div className="selector-card">
-        <h2 className="selector-title">Select Appointment Date</h2>
+        <h2 className="selector-title">📅 Select Appointment Date</h2>
         <p className="selector-subtitle">Choose a convenient date for your {selectedService?.name} consultation</p>
 
-        {/* Quick Date Selection */}
         <div className="quick-dates">
           <h3 className="section-heading">Quick Select</h3>
           <div className="quick-dates-grid">
@@ -59,7 +58,6 @@ const DateSelector = ({ onSelect, onBack, selectedService }) => {
           </div>
         </div>
 
-        {/* Calendar Date Selection */}
         <div className="calendar-section">
           <h3 className="section-heading">Or Choose from Calendar</h3>
           <div className="calendar-input-container">
@@ -74,7 +72,6 @@ const DateSelector = ({ onSelect, onBack, selectedService }) => {
           </div>
         </div>
 
-        {/* Selected Date Display */}
         {selectedDate && (
           <div className="selected-date-display">
             <span className="display-icon">📅</span>
@@ -92,17 +89,16 @@ const DateSelector = ({ onSelect, onBack, selectedService }) => {
           </div>
         )}
 
-        {/* Action Buttons */}
         <div className="action-buttons">
           <button className="btn-back" onClick={onBack}>
-            ← Back
+            Back
           </button>
           <button
             className="btn-continue"
             onClick={handleConfirm}
             disabled={!selectedDate}
           >
-            Continue →
+            Continue
           </button>
         </div>
       </div>

@@ -1,60 +1,88 @@
 .date-selector {
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.6s ease-out;
 }
 
 .section-heading {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
-/* Quick Dates */
+.section-heading::before {
+  content: '📅';
+  font-size: 1.5rem;
+}
+
 .quick-dates {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .quick-dates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1.2rem;
 }
 
 .quick-date-btn {
-  padding: 1rem;
+  padding: 1.3rem 1rem;
   background: white;
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border: 2px solid var(--gray-lightest);
+  border-radius: 16px;
+  transition: var(--transition);
   text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-date-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.quick-date-btn:hover::before {
+  transform: scaleX(1);
 }
 
 .quick-date-btn:hover {
-  border-color: var(--primary-color);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  border-color: #667eea;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
 }
 
 .quick-date-btn.selected {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-color: transparent;
   color: white;
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+  transform: translateY(-5px);
 }
 
 .quick-date-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
 }
 
 .quick-date-full {
-  font-size: 0.85rem;
-  opacity: 0.8;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  font-weight: 500;
 }
 
-/* Calendar Section */
 .calendar-section {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .calendar-input-container {
@@ -64,39 +92,54 @@
 
 .calendar-input {
   width: 100%;
-  max-width: 400px;
-  padding: 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-dark);
-  transition: all 0.3s ease;
+  max-width: 450px;
+  padding: 1.3rem 1.5rem;
+  border: 2px solid var(--gray-lightest);
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--dark);
+  transition: var(--transition);
   cursor: pointer;
+  background: white;
 }
 
 .calendar-input:hover {
-  border-color: var(--primary-color);
+  border-color: #667eea;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
 }
 
 .calendar-input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
 }
 
-/* Selected Date Display */
 .selected-date-display {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-  border-radius: 12px;
-  margin-bottom: 2rem;
+  gap: 1.3rem;
+  padding: 1.8rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border-radius: 20px;
+  margin-bottom: 2.5rem;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.1);
+  animation: scaleIn 0.4s ease-out;
 }
 
 .display-icon {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  font-weight: 800;
 }
 
 .display-content {
@@ -104,102 +147,53 @@
 }
 
 .display-label {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .display-value {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-dark);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--dark);
 }
 
-/* Action Buttons */
-.action-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-.btn-back,
-.btn-continue {
-  flex: 1;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.btn-back {
-  background: white;
-  border: 2px solid var(--border-color);
-  color: var(--text-dark);
-}
-
-.btn-back:hover {
-  border-color: var(--text-dark);
-  transform: translateY(-2px);
-}
-
-.btn-continue {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  border: none;
-}
-
-.btn-continue:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-continue:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
   .quick-dates-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.8rem;
+    gap: 1rem;
   }
 
   .quick-date-btn {
-    padding: 0.8rem 0.5rem;
+    padding: 1.1rem 0.8rem;
   }
 
   .quick-date-label {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .quick-date-full {
-    font-size: 0.75rem;
-  }
-
-  .action-buttons {
-    flex-direction: column;
-  }
-
-  .btn-back,
-  .btn-continue {
-    width: 100%;
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .quick-dates-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
   }
 
   .calendar-input {
-    font-size: 0.9rem;
-    padding: 0.8rem;
+    font-size: 1rem;
+    padding: 1.1rem 1.3rem;
   }
 
   .selected-date-display {
     flex-direction: column;
     text-align: center;
+    padding: 1.5rem;
   }
 }

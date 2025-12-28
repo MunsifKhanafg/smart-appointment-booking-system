@@ -1,8 +1,7 @@
 {
-  "homepage": "https://munsifkhanafg.github.io/smart-appointment-booking-system",
+  "name": "smart-appointment-booking-system",
   "version": "1.0.0",
   "private": true,
-  "description": "A modern doctor appointment booking system with 50+ medical services",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -10,10 +9,10 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -31,8 +30,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
   }
 }
