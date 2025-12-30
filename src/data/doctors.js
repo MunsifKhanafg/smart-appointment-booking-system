@@ -115,7 +115,7 @@ export const doctors = [
     qualification: "MBBS, MS (ENT)",
     consultationFee: 1500,
     rating: 4.7,
-    image: "https://images.unsplash.com/photo-1612531386530-97286d97c2d9?w=300&h=300&fit=crop",
+    image: "https://online-learning-college.com/wp-content/uploads/2023/01/Qualifications-to-Become-a-Doctor--scaled.jpg",
     availableDays: ["Tuesday", "Wednesday", "Thursday", "Friday"],
     timeSlots: ["09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]
   },
@@ -175,8 +175,8 @@ export const doctors = [
     qualification: "MBBS, MD (Pulmonology)",
     consultationFee: 1600,
     rating: 4.7,
-    image: "https://images.unsplash.com/photo-1629905376409-b248069a3d3c?w=300&h=300&fit=crop",
-    availableDays: ["Monday", "Wednesday", "Thursday", "Saturday"],
+    image: "https://c8.alamy.com/comp/CWEHPP/portrait-uk-doctor-sitting-at-desk-CWEHPP.jpg",
+     availableDays: ["Monday", "Wednesday", "Thursday", "Saturday"],
     timeSlots: ["10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]
   },
   {
@@ -187,8 +187,8 @@ export const doctors = [
     qualification: "MBBS, MD (Nephrology)",
     consultationFee: 1800,
     rating: 4.8,
-    image: "https://images.unsplash.com/photo-1622253694242-abeb37a33d9e?w=300&h=300&fit=crop",
-    availableDays: ["Tuesday", "Wednesday", "Thursday", "Friday"],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd2D-tv4x5zIWXMKc6s9X1aC_eOsEFFx7YIw&s",
+     availableDays: ["Tuesday", "Wednesday", "Thursday", "Friday"],
     timeSlots: ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"]
   },
   {
