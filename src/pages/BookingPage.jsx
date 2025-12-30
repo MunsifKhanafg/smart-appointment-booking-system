@@ -4,6 +4,8 @@ import DateSelector from '../components/DateSelector';
 import TimeSlotSelector from '../components/TimeSlotSelector';
 import UserDetailsForm from '../components/UserDetailsForm';
 import BookingConfirmation from '../components/BookingConfirmation';
+import NotificationModal from '../components/NotificationModal';
+import SuccessMessageModal from '../components/SuccessMessageModal';
 import { addBooking, getServiceById } from '../utils/bookingUtils';
 import './BookingPage.css';
 
@@ -21,6 +23,13 @@ const BookingPage = () => {
     symptoms: ''
   });
   const [confirmedBooking, setConfirmedBooking] = useState(null);
+  const [notification, setNotification] = useState({
+    isOpen: false,
+    type: 'error',
+    title: '',
+    message: ''
+  });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -51,9 +60,17 @@ const BookingPage = () => {
     const newBooking = addBooking(completeBookingData);
     if (newBooking) {
       setConfirmedBooking(newBooking);
-      setStep(5);
+      setShowSuccessModal(true);
+      setTimeout(() => {
+        setStep(5);
+      }, 5000);
     } else {
-      alert('❌ Failed to create booking. Please try again.');
+      setNotification({
+        isOpen: true,
+        type: 'error',
+        title: 'Booking Failed',
+        message: 'Failed to create booking. Please try again.'
+      });
     }
   };
 
@@ -77,6 +94,7 @@ const BookingPage = () => {
       symptoms: ''
     });
     setConfirmedBooking(null);
+    setShowSuccessModal(false);
   };
 
   const selectedService = bookingData.serviceId ? getServiceById(bookingData.serviceId) : null;
@@ -188,6 +206,26 @@ const BookingPage = () => {
           )}
         </div>
       </div>
+
+      <NotificationModal
+        isOpen={notification.isOpen}
+        onClose={() => setNotification({ ...notification, isOpen: false })}
+        type={notification.type}
+        title={notification.title}
+        message={notification.message}
+        autoClose={true}
+        duration={3000}
+      />
+
+      <SuccessMessageModal
+        isOpen={showSuccessModal}
+        onClose={() => {
+          setShowSuccessModal(false);
+          setStep(5);
+        }}
+        booking={confirmedBooking}
+        service={selectedService}
+      />
     </div>
   );
 };

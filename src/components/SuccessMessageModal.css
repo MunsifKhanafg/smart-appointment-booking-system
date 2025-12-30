@@ -1,0 +1,382 @@
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10001;
+  animation: fadeIn 0.3s ease-out;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.success-modal-container {
+  background: white;
+  border-radius: 24px;
+  padding: 48px 40px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  position: relative;
+  text-align: center;
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.success-modal-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #334155;
+  transform: rotate(90deg);
+}
+
+.success-animation {
+  margin-bottom: 24px;
+}
+
+.success-checkmark {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkmark {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: #10b981;
+  stroke-miterlimit: 10;
+  box-shadow: inset 0 0 0 #10b981;
+  animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+  stroke: #10b981;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: #10b981;
+  stroke-width: 3;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0 0 0 50px #d1fae5;
+  }
+}
+
+.success-modal-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #10b981;
+  margin: 0 0 12px 0;
+  animation: slideDown 0.5s ease-out 0.3s both;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.success-modal-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0 0 32px 0;
+  animation: slideDown 0.5s ease-out 0.4s both;
+}
+
+.success-details {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: left;
+  animation: slideDown 0.5s ease-out 0.5s both;
+}
+
+.success-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.success-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-icon-circle {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.detail-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.success-message-box {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-left: 4px solid #3b82f6;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  text-align: left;
+  animation: slideDown 0.5s ease-out 0.6s both;
+}
+
+.success-message-box svg {
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.success-message-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #1e40af;
+  line-height: 1.5;
+}
+
+.success-message-box strong {
+  font-weight: 600;
+  color: #1e3a8a;
+}
+
+.success-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  animation: slideDown 0.5s ease-out 0.7s both;
+}
+
+.success-status-badge svg {
+  color: #f59e0b;
+}
+
+.success-progress-bar {
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.success-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .success-modal-container {
+    padding: 40px 24px;
+    border-radius: 20px;
+  }
+
+  .success-checkmark {
+    width: 80px;
+    height: 80px;
+  }
+
+  .checkmark {
+    width: 80px;
+    height: 80px;
+  }
+
+  .success-modal-title {
+    font-size: 26px;
+  }
+
+  .success-modal-subtitle {
+    font-size: 15px;
+  }
+
+  .success-details {
+    padding: 20px;
+  }
+
+  .detail-icon-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .detail-icon-circle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .detail-label {
+    font-size: 12px;
+  }
+
+  .detail-value {
+    font-size: 14px;
+  }
+
+  .success-message-box {
+    padding: 14px 16px;
+  }
+
+  .success-message-box svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .success-message-box p {
+    font-size: 13px;
+  }
+
+  .success-status-badge {
+    font-size: 13px;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .success-modal-overlay {
+    padding: 15px;
+  }
+
+  .success-modal-container {
+    padding: 32px 20px;
+  }
+
+  .success-checkmark {
+    width: 70px;
+    height: 70px;
+  }
+
+  .checkmark {
+    width: 70px;
+    height: 70px;
+  }
+
+  .success-modal-title {
+    font-size: 22px;
+  }
+
+  .success-modal-subtitle {
+    font-size: 14px;
+  }
+
+  .success-details {
+    padding: 16px;
+  }
+
+  .success-detail-item {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+}

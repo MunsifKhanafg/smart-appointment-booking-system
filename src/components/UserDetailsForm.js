@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { formatDate } from '../utils/bookingUtils';
+import BookingConfirmationModal from './BookingConfirmationModal';
 import './UserDetailsForm.css';
 
 const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => {
@@ -13,6 +14,7 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
   });
 
   const [errors, setErrors] = useState({});
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,8 +76,13 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      onSubmit(formData);
+      setShowConfirmModal(true);
     }
+  };
+
+  const handleConfirmBooking = () => {
+    setShowConfirmModal(false);
+    onSubmit(formData);
   };
 
   return (
@@ -221,6 +228,15 @@ const UserDetailsForm = ({ onSubmit, onBack, bookingData, selectedService }) => 
             </button>
           </div>
         </form>
+
+        <BookingConfirmationModal
+          isOpen={showConfirmModal}
+          onClose={() => setShowConfirmModal(false)}
+          onConfirm={handleConfirmBooking}
+          bookingData={bookingData}
+          selectedService={selectedService}
+          formData={formData}
+        />
       </div>
     </div>
   );

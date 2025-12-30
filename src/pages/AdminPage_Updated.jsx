@@ -6,8 +6,7 @@ import {
   getServiceById,
   formatDate
 } from '../utils/bookingUtils';
-import ConfirmModal from '../components/ConfirmModal';
-import NotificationModal from '../components/NotificationModal';
+import { useAlert } from '../modules/AlertModule';
 import './AdminPage.css';
 
 const AdminPage = () => {
@@ -23,18 +22,9 @@ const AdminPage = () => {
     approved: 0,
     cancelled: 0
   });
-  const [modalState, setModalState] = useState({
-    isOpen: false,
-    bookingId: null,
-    newStatus: null,
-    type: null
-  });
-  const [notification, setNotification] = useState({
-    isOpen: false,
-    type: 'info',
-    title: '',
-    message: ''
-  });
+
+  // Use the Alert Module
+  const { showSuccess, showError, showWarning, showConfirm } = useAlert();
 
   useEffect(() => {
     loadBookings();
@@ -90,45 +80,61 @@ const AdminPage = () => {
     setExpandedBooking(expandedBooking === bookingId ? null : bookingId);
   };
 
-  const openModal = (bookingId, newStatus, type) => {
-    setModalState({
-      isOpen: true,
-      bookingId,
-      newStatus,
-      type
-    });
-  };
+  const handleStatusChange = (bookingId, newStatus) => {
+    const booking = bookings.find(b => b.id === bookingId);
+    if (!booking) return;
 
-  const closeModal = () => {
-    setModalState({
-      isOpen: false,
-      bookingId: null,
-      newStatus: null,
-      type: null
-    });
-  };
+    const messages = {
+      [BOOKING_STATUS.APPROVED]: {
+        title: 'Approve Appointment?',
+        message: `Are you sure you want to approve the appointment for ${booking.userName}? The patient will be notified via email.`,
+        successTitle: 'Appointment Approved ✅',
+        successMessage: 'The patient has been notified about their confirmed appointment.',
+      },
+      [BOOKING_STATUS.CANCELLED]: {
+        title: 'Cancel Appointment?',
+        message: `Are you sure you want to cancel the appointment for ${booking.userName}? This action cannot be undone.`,
+        successTitle: 'Appointment Cancelled',
+        successMessage: 'The appointment has been cancelled and the patient has been notified.',
+      },
+      [BOOKING_STATUS.PENDING]: {
+        title: 'Set to Pending?',
+        message: `Change the status of ${booking.userName}'s appointment to pending?`,
+        successTitle: 'Status Changed',
+        successMessage: 'Appointment status has been set to pending.',
+      }
+    };
 
-  const handleStatusChange = () => {
-    const { bookingId, newStatus } = modalState;
-    const success = updateBookingStatus(bookingId, newStatus);
-    if (success) {
-      loadBookings();
-      closeModal();
-      setNotification({
-        isOpen: true,
-        type: 'success',
-        title: 'Status Updated',
-        message: `Booking status has been successfully updated to ${newStatus}.`
-      });
-    } else {
-      closeModal();
-      setNotification({
-        isOpen: true,
-        type: 'error',
-        title: 'Update Failed',
-        message: 'Failed to update booking status. Please try again.'
-      });
-    }
+    const msg = messages[newStatus];
+
+    showConfirm(
+      msg.title,
+      msg.message,
+      () => {
+        // On Confirm
+        const success = updateBookingStatus(bookingId, newStatus);
+        if (success) {
+          loadBookings();
+          if (newStatus === BOOKING_STATUS.APPROVED) {
+            showSuccess(msg.successTitle, msg.successMessage, 3500);
+          } else if (newStatus === BOOKING_STATUS.CANCELLED) {
+            showWarning(msg.successTitle, msg.successMessage, 3500);
+          } else {
+            showWarning(msg.successTitle, msg.successMessage, 3000);
+          }
+        } else {
+          showError(
+            'Update Failed',
+            'Failed to update booking status. Please try again.',
+            4000
+          );
+        }
+      },
+      () => {
+        // On Cancel - do nothing or show info
+        console.log('Status change cancelled');
+      }
+    );
   };
 
   const getStatusColor = (status) => {
@@ -144,47 +150,12 @@ const AdminPage = () => {
     }
   };
 
-  const getModalContent = () => {
-    const { newStatus } = modalState;
-    switch(newStatus) {
-      case BOOKING_STATUS.APPROVED:
-        return {
-          title: 'Approve Booking',
-          message: 'Are you sure you want to approve this appointment booking? The patient will be notified.',
-          confirmText: 'Yes, Approve',
-          type: 'approve'
-        };
-      case BOOKING_STATUS.CANCELLED:
-        return {
-          title: 'Cancel Booking',
-          message: 'Are you sure you want to cancel this appointment booking? This action cannot be undone.',
-          confirmText: 'Yes, Cancel',
-          type: 'cancel'
-        };
-      case BOOKING_STATUS.PENDING:
-        return {
-          title: 'Set to Pending',
-          message: 'Are you sure you want to change this booking status to pending?',
-          confirmText: 'Yes, Set Pending',
-          type: 'pending'
-        };
-      default:
-        return {
-          title: 'Confirm Action',
-          message: 'Are you sure you want to proceed?',
-          confirmText: 'Confirm',
-          type: 'primary'
-        };
-    }
-  };
-
   const clearFilters = () => {
     setFilterDate('');
     setFilterStatus('all');
     setSearchTerm('');
+    showSuccess('Filters Cleared', 'All filters have been reset.', 2000);
   };
-
-  const modalContent = getModalContent();
 
   return (
     <div className="admin-page">
@@ -562,7 +533,7 @@ const AdminPage = () => {
                           <div className="action-buttons">
                             <button
                               className="action-btn approve"
-                              onClick={() => openModal(booking.id, BOOKING_STATUS.APPROVED, 'approve')}
+                              onClick={() => handleStatusChange(booking.id, BOOKING_STATUS.APPROVED)}
                               disabled={booking.status === BOOKING_STATUS.APPROVED}
                             >
                               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -572,7 +543,7 @@ const AdminPage = () => {
                             </button>
                             <button
                               className="action-btn pending"
-                              onClick={() => openModal(booking.id, BOOKING_STATUS.PENDING, 'pending')}
+                              onClick={() => handleStatusChange(booking.id, BOOKING_STATUS.PENDING)}
                               disabled={booking.status === BOOKING_STATUS.PENDING}
                             >
                               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -583,7 +554,7 @@ const AdminPage = () => {
                             </button>
                             <button
                               className="action-btn cancel"
-                              onClick={() => openModal(booking.id, BOOKING_STATUS.CANCELLED, 'cancel')}
+                              onClick={() => handleStatusChange(booking.id, BOOKING_STATUS.CANCELLED)}
                               disabled={booking.status === BOOKING_STATUS.CANCELLED}
                             >
                               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -603,27 +574,6 @@ const AdminPage = () => {
           )}
         </div>
       </div>
-
-      <ConfirmModal
-        isOpen={modalState.isOpen}
-        onClose={closeModal}
-        onConfirm={handleStatusChange}
-        title={modalContent.title}
-        message={modalContent.message}
-        confirmText={modalContent.confirmText}
-        cancelText="No, Go Back"
-        type={modalContent.type}
-      />
-
-      <NotificationModal
-        isOpen={notification.isOpen}
-        onClose={() => setNotification({ ...notification, isOpen: false })}
-        type={notification.type}
-        title={notification.title}
-        message={notification.message}
-        autoClose={true}
-        duration={3000}
-      />
     </div>
   );
 };
